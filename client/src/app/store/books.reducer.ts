@@ -26,7 +26,8 @@ const booksReducer = createReducer(
   on(
     BooksActions.SearchBooksSuccess,
     (state, payload): State => ({
-      ...payload,
+      term: payload.term,
+      booksList: payload.booksList,
       isLoading: false,
       isError: false
     })

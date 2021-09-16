@@ -8,9 +8,10 @@ app.use(cors());
 
 app.get('/search-books', (req, res) => {
     const data = [];
+    const term = req.query.term;
     const options = {
         hostname: 'www.googleapis.com',
-        path: `/books/v1/volumes?q=${req.query.searchTerm}&key=${process.env.GOOGLE_API_KEY}`,
+        path: `/books/v1/volumes?q=${term}&key=${process.env.GOOGLE_API_KEY}`,
         method: 'GET',
     }
 
@@ -20,19 +21,10 @@ app.get('/search-books', (req, res) => {
         }).on('end', () => {
             const buffer = Buffer.concat(data);
             const jsonFromBuffer = JSON.parse(buffer.toString());
+            const booksList = getBooksList(jsonFromBuffer);
             res
                 .status(searchResponse.statusCode)
-                .json({
-                    term: req.query.searchTerm,
-                    booksList: jsonFromBuffer.items.map((book) => ({
-                        title: book.volumeInfo.title ? book.volumeInfo.title : null,
-                        subtitle: book.volumeInfo.subtitle ? book.volumeInfo.subtitle : null,
-                        authors: book.volumeInfo.authors ? book.volumeInfo.authors : null,
-                        description: book.volumeInfo.description ? book.volumeInfo.description : null,
-                        image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : null
-                    }))
-
-                });
+                .json({ term, booksList });
 
         });
     })
@@ -47,3 +39,13 @@ app.get('/search-books', (req, res) => {
 app.listen(process.env.PORT, () => {
     console.log(`Example app listening at http://localhost:${process.env.PORT}`);
 })
+
+const getBooksList = (responseObject) => {
+    return responseObject.items.map(book => ({
+        title: book.volumeInfo.title ? book.volumeInfo.title : null,
+        subtitle: book.volumeInfo.subtitle ? book.volumeInfo.subtitle : null,
+        authors: book.volumeInfo.authors ? book.volumeInfo.authors : null,
+        description: book.volumeInfo.description ? book.volumeInfo.description : null,
+        image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : null
+    }))
+}
