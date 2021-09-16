@@ -21,7 +21,19 @@ app.get('/search-books', (req, res) => {
             data.push(chunk);
         }).on('end', () => {
             const buffer = Buffer.concat(data);
-            res.json(JSON.parse(buffer.toString()));
+            const jsonFromBuffer = JSON.parse(buffer.toString());
+            res.json({
+                term: req.query.searchTerm,
+                booksList: jsonFromBuffer.items.map((book ) => ({
+                    title: book.volumeInfo.title ? book.volumeInfo.title : null,
+                    subtitle: book.volumeInfo.subtitle ? book.volumeInfo.subtitle : null,
+                    authors: book.volumeInfo.authors ? book.volumeInfo.authors : null,
+                    description: book.volumeInfo.description ? book.volumeInfo.description : null,
+                    image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : null
+                }))
+
+            });
+
         });
     })
 
