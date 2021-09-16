@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,7 +18,7 @@ import { AppComponent } from './app.component';
 
 import { environment } from '../environments/environment';
 import { reducers } from './store/state.index';
-import { AppEffects } from './store/app.effect';
+import { BooksEffect } from './store/books.effect';
 import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
@@ -26,12 +27,13 @@ import { SearchComponent } from './components/search/search.component';
     SearchComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatInputModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AppEffects]),
+    EffectsModule.forRoot([BooksEffect]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     FormsModule,
     MatIconModule,
