@@ -1,0 +1,30 @@
+<h1>E-square books search</h1>
+<form
+  [formGroup]="searchBooksForm"
+  (keydown.enter)="$event.preventDefault()"
+  (ngSubmit)="searchBooks()"
+  fxLayout="row"
+  fxLayoutAlign="center none">
+  <mat-form-field floatLabel="never">
+    <mat-label>Search for books</mat-label>
+    <input matInput type="search" formControlName="searchTerm">
+    <mat-error *ngIf="hasError('searchTerm', 'required')">Required filed - please type a book name</mat-error>
+    <button
+      (click)="resetSearchTerm()"
+      *ngIf="displayButton()"
+      aria-label="Clear"
+      mat-button
+      mat-icon-button
+      matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <button
+      mat-fab
+      matSuffix
+      [disabled]="isDisabled()"
+      color="primary">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+</form>
