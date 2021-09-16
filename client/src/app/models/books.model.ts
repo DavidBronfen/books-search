@@ -12,6 +12,7 @@ export interface IBookItemModel {
   image: string;
 }
 
-export interface IBooksModel extends ISearchRequestModel {
-  isLoading: boolean
+export interface IBooksModel extends ISearchResponseModel {
+  isLoading: boolean,
+  isError: boolean
 }

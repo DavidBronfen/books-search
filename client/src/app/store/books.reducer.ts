@@ -7,7 +7,9 @@ export type State = IBooksModel;
 
 export const initialState: Readonly<State> = {
   term: null,
-  booksList: null
+  booksList: null,
+  isLoading: null,
+  isError: null
 }
 
 const booksReducer = createReducer(
@@ -16,15 +18,27 @@ const booksReducer = createReducer(
     BooksActions.SearchBooks,
     (state, payload): State => ({
       term: payload.term,
-      booksList: null
+      booksList: null,
+      isLoading: true,
+      isError: false
     })
   ),
   on(
     BooksActions.SearchBooksSuccess,
     (state, payload): State => ({
-      ...payload
-    }),
-
+      ...payload,
+      isLoading: false,
+      isError: false
+    })
+  ),
+  on(
+    BooksActions.SearchBooksFailed,
+    (state): State => ({
+      ...state,
+      booksList: null,
+      isLoading: false,
+      isError: true
+    })
   )
 )
 
