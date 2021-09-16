@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
 const https = require('https');
+const cors = require("cors");
 require('dotenv').config();
+
+app.use(cors());
 
 app.get('/search-books', (req, res) => {
     const data = [];
