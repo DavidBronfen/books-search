@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { SearchBooks } from '../../store/books.actions';
 
 @Component({
   selector: 'app-search',
@@ -9,13 +11,13 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 export class SearchComponent implements OnInit {
   searchBooksForm: FormGroup;
 
-  constructor() {
+  constructor(private store: Store) {}
+
+  ngOnInit(): void {
     this.searchBooksForm = new FormGroup({
       searchTerm: new FormControl(null, [Validators.required])
     });
   }
-
-  ngOnInit(): void {}
 
   get searchTerm(): AbstractControl {
     return this.searchBooksForm.get('searchTerm') as AbstractControl;
@@ -33,7 +35,7 @@ export class SearchComponent implements OnInit {
   }
 
   searchBooks(): void {
-    console.log(this.searchTerm.value);
+    this.store.dispatch(SearchBooks({ term: this.searchTerm.value }))
   }
 
   isDisabled(): boolean {
