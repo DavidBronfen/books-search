@@ -7,7 +7,9 @@ export interface ISearchResponseModel extends ISearchRequestModel {
 }
 
 export interface IBookItemModel {
-  name: string;
+  title: string;
+  subtitle: string;
+  authors: string;
   description: string;
   image: string;
 }

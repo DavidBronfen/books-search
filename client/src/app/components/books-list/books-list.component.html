@@ -1,0 +1,30 @@
+<div *ngIf="loading">
+  <img src="assets/spinner.gif" alt="Searching books loader">
+</div>
+
+<div *ngIf="showWelcome()">
+  <img src="assets/book1.gif" alt="Welcome gif">
+</div>
+
+<div
+  class="grid" *ngIf="books && books.length && !loading">
+  <div class="item" *ngFor="let book of books">
+    <div class="content">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{book.title}}</mat-card-title>
+          <mat-card-subtitle>{{book.subtitle}}</mat-card-subtitle>
+          <mat-card-subtitle>{{book.authors}}</mat-card-subtitle>
+        </mat-card-header>
+        <img
+          loadingCheck
+          mat-card-image
+          [src]="book.image ? book.image : placeholderImage"
+          alt="Photo of {{book.title}}">
+        <mat-card-content>
+          <p>{{book.description}}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

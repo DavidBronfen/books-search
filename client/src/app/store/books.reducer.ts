@@ -1,5 +1,5 @@
 import { IBooksModel } from '../models/books.model';
-import { Action, createReducer, on } from '@ngrx/store';
+import { Action, createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 
 import * as BooksActions from './books.actions';
 
@@ -44,3 +44,8 @@ const booksReducer = createReducer(
 )
 
 export const reducer = (state: State, action: Action): State => booksReducer(state, action);
+const booksState = createFeatureSelector<State>('books');
+
+export const getBooksList = createSelector(booksState, (state: IBooksModel) => state.booksList);
+export const isLoadingBooks = createSelector(booksState, (state: IBooksModel) => state.isLoading);
+
