@@ -53,7 +53,7 @@ export class BooksListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.subscription = this.images.changes.subscribe(res => {
+    this.subscription = this.images.changes.subscribe(() => {
       forkJoin(this.images.map(imgDir => imgDir.loaded)).subscribe(() => {
         console.log('all images have been loaded');
         this.resizeAllGridItems();

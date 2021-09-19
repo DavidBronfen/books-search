@@ -1,5 +1,5 @@
 <div *ngIf="loading">
-  <img src="assets/book-loader.gif" alt="Searching books loader">
+  <img src="assets/spinner.gif" alt="Searching books loader">
 </div>
 
 <div *ngIf="showWelcome()">
@@ -7,7 +7,7 @@
 </div>
 
 <div
-  class="grid" *ngIf="books && books.length">
+  class="grid" *ngIf="books && books.length && !loading">
   <div class="item" *ngFor="let book of books">
     <div class="content">
       <mat-card>
