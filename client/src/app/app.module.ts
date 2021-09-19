@@ -14,32 +14,39 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { ImageDirective } from './directives/image.directive';
+
 import { AppComponent } from './app.component';
 
 import { environment } from '../environments/environment';
 import { reducers } from './store/state.index';
 import { BooksEffect } from './store/books.effect';
 import { SearchComponent } from './components/search/search.component';
+import { BooksListComponent } from './components/books-list/books-list.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent
+    SearchComponent,
+    BooksListComponent,
+    ImageDirective
   ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    MatInputModule,
-    StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([BooksEffect]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    FormsModule,
-    MatIconModule,
-    MatButtonModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        MatInputModule,
+        StoreModule.forRoot(reducers),
+        EffectsModule.forRoot([BooksEffect]),
+        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+        FormsModule,
+        MatIconModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatCardModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
