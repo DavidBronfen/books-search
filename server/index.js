@@ -7,6 +7,12 @@ const port = process.env.PORT || 8080;
 
 app.use(cors());
 
+app.use(express.static(__dirname + '/public'));
+
+app.get('/', function(req, res) {
+    res.render('index');
+});
+
 app.get('/search-books', (req, res) => {
     const data = [];
     const term = req.query.term;
