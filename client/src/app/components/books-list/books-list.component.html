@@ -6,6 +6,10 @@
   <img src="assets/book1.gif" alt="Welcome gif">
 </div>
 
+<div *ngIf="books && books.length === 0 && !loading">
+  <img src="assets/try-again.gif" alt="No results found">
+</div>
+
 <div
   class="grid" *ngIf="books && books.length && !loading">
   <div class="item" *ngFor="let book of books">

@@ -42,6 +42,7 @@ app.listen(process.env.PORT, () => {
 })
 
 const getBooksList = (responseObject) => {
+    if(responseObject.totalItems === 0) return [];
     return responseObject.items.map(book => ({
         title: book.volumeInfo.title ? book.volumeInfo.title : null,
         subtitle: book.volumeInfo.subtitle ? book.volumeInfo.subtitle : null,
