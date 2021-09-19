@@ -19,7 +19,7 @@
         <img
           loadingCheck
           mat-card-image
-          [src]="book.image"
+          [src]="book.image ? book.image : placeholderImage"
           alt="Photo of {{book.title}}">
         <mat-card-content>
           <p>{{book.description}}</p>

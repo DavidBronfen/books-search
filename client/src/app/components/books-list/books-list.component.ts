@@ -28,6 +28,7 @@ export class BooksListComponent implements OnInit, OnDestroy, AfterViewInit {
   loading: boolean;
   subscription: Subscription;
   @ViewChildren(ImageDirective) images: QueryList<ImageDirective>;
+  placeholderImage = '../../../assets/no_image.jpg';
 
   constructor(private store: Store) {
   }

@@ -2,17 +2,16 @@ import {
   Directive,
   HostListener,
   Output,
-  EventEmitter,
+  EventEmitter
 } from '@angular/core';
 
 @Directive({
   selector: 'img[loadingCheck]'
 })
 export class ImageDirective {
-
   @Output() loaded = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
   @HostListener("load")
   @HostListener("error")
