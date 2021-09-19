@@ -9,9 +9,10 @@ app.use(cors());
 app.get('/search-books', (req, res) => {
     const data = [];
     const term = req.query.term;
+    const encodedTerm = encodeURI(term);
     const options = {
         hostname: 'www.googleapis.com',
-        path: `/books/v1/volumes?q=${term}&key=${process.env.GOOGLE_API_KEY}`,
+        path: `/books/v1/volumes?q=${encodedTerm}&key=${process.env.GOOGLE_API_KEY}`,
         method: 'GET',
     }
 
@@ -44,7 +45,7 @@ const getBooksList = (responseObject) => {
     return responseObject.items.map(book => ({
         title: book.volumeInfo.title ? book.volumeInfo.title : null,
         subtitle: book.volumeInfo.subtitle ? book.volumeInfo.subtitle : null,
-        authors: book.volumeInfo.authors ? book.volumeInfo.authors : null,
+        authors: book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : null,
         description: book.volumeInfo.description ? book.volumeInfo.description : null,
         image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : null
     }))
