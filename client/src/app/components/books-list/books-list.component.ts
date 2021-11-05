@@ -1,14 +1,14 @@
 import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   OnDestroy,
   OnInit,
   QueryList,
-  ViewChildren,
-  AfterViewInit
+  ViewChildren
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { forkJoin, Subject, Subscription, } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { forkJoin, Observable, Subscription } from 'rxjs';
 
 import { getBooksList, isLoadingBooks } from '../../store/books.reducer';
 import { IBookItemModel } from '../../models/books.model';
@@ -18,14 +18,15 @@ import { ImageDirective } from '../../directives/image.directive';
   selector: 'app-books-list',
   templateUrl: './books-list.component.html',
   styleUrls: ['./books-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '(window:resize)': 'onResize()'
   }
 })
 export class BooksListComponent implements OnInit, OnDestroy, AfterViewInit {
-  unsubscribe$: Subject<void> = new Subject<void>();
-  books: IBookItemModel[];
-  loading: boolean;
+  books$: Observable<IBookItemModel[]>;
+  loading$: Observable<boolean>;
+
   subscription: Subscription;
   @ViewChildren(ImageDirective) images: QueryList<ImageDirective>;
   placeholderImage = 'assets/no_image.jpg';
@@ -34,15 +35,8 @@ export class BooksListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.store
-      .select(getBooksList)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(booksListState => this.books = booksListState);
-
-    this.store
-      .select(isLoadingBooks)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(loaderState => this.loading = loaderState)
+    this.books$ = this.store.select(getBooksList)
+    this.loading$ = this.store.select(isLoadingBooks);
   }
 
   resizeAllGridItems() {
@@ -53,11 +47,13 @@ export class BooksListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.subscription = this.images.changes.subscribe(() => {
-      forkJoin(this.images.map(imgDir => imgDir.loaded)).subscribe(() => {
-        this.resizeAllGridItems();
+    this.subscription = this.images.changes
+      .subscribe(() => {
+        forkJoin(this.images.map(imgDir => imgDir.loaded))
+          .subscribe(() => {
+            this.resizeAllGridItems();
+          });
       });
-    });
   }
 
   resizeGridItem(item: Element) {
@@ -70,18 +66,24 @@ export class BooksListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }
 
-  showWelcome(): boolean {
-    return this.books === null && !this.loading
-  }
-
   onResize() {
     this.resizeAllGridItems();
+  }
+
+  showWelcome(data: { books: IBookItemModel[] | null; loading: boolean | null }): boolean {
+    return data.books === null && !data.loading
+  }
+
+  showNoResults(data: { books: IBookItemModel[] | null; loading: boolean | null }): boolean {
+    return data.books && data.books.length === 0 && !data.loading;
+  }
+
+  showResults(data: { books: IBookItemModel[] | null; loading: boolean | null }) {
+    return data.books && data.books.length && !data.loading;
   }
 }

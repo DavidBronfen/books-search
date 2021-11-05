@@ -1,34 +1,40 @@
-<div *ngIf="loading">
-  <img src="assets/spinner.gif" alt="Searching books loader">
-</div>
+<ng-container *ngIf="{
+  loading: loading$ | async,
+  books: books$ | async
+} as data">
 
-<div *ngIf="showWelcome()">
-  <img src="assets/book1.gif" alt="Welcome gif">
-</div>
+  <div *ngIf="data.loading">
+    <img src="assets/spinner.gif" alt="Searching books loader">
+  </div>
 
-<div *ngIf="books && books.length === 0 && !loading">
-  <img src="assets/try-again.gif" alt="No results found">
-</div>
+  <div *ngIf="showWelcome(data)">
+    <img src="assets/book1.gif" alt="Welcome gif">
+  </div>
 
-<div
-  class="grid" *ngIf="books && books.length && !loading">
-  <div class="item" *ngFor="let book of books">
-    <div class="content">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>{{book.title}}</mat-card-title>
-          <mat-card-subtitle>{{book.subtitle}}</mat-card-subtitle>
-          <mat-card-subtitle>{{book.authors}}</mat-card-subtitle>
-        </mat-card-header>
-        <img
-          loadingCheck
-          mat-card-image
-          [src]="book.image ? book.image : placeholderImage"
-          alt="Photo of {{book.title}}">
-        <mat-card-content>
-          <p>{{book.description}}</p>
-        </mat-card-content>
-      </mat-card>
+  <div *ngIf="showNoResults(data)">
+    <img src="assets/try-again.gif" alt="No results found">
+  </div>
+
+  <div class="grid" *ngIf="showResults(data)">
+    <div class="item" *ngFor="let book of data.books">
+      <div class="content">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{book.title}}</mat-card-title>
+            <mat-card-subtitle>{{book.subtitle}}</mat-card-subtitle>
+            <mat-card-subtitle>{{book.authors}}</mat-card-subtitle>
+          </mat-card-header>
+          <img
+            loadingCheck
+            mat-card-image
+            [src]="book.image ? book.image : placeholderImage"
+            alt="Photo of {{book.title}}">
+          <mat-card-content>
+            <p>{{book.description}}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
     </div>
   </div>
-</div>
+
+</ng-container>
