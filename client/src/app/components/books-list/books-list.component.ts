@@ -3,6 +3,7 @@ import {
   Component,
   OnInit,
   QueryList,
+  Renderer2,
   ViewChildren
 } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -28,7 +29,7 @@ export class BooksListComponent implements OnInit {
   books$: Observable<IBookItemModel[]>;
   loading$: Observable<boolean>;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private renderer: Renderer2) {}
 
   ngOnInit(): void {
     this.books$ = this.store.select(getBooksList)
@@ -45,13 +46,14 @@ export class BooksListComponent implements OnInit {
     this.bookCards.map(card => this.resizeGridItem(card.elementRef.nativeElement))
   }
 
-  resizeGridItem(item: Element) {
+  resizeGridItem(item: HTMLElement) {
     const grid = document.getElementsByClassName("grid")[0];
     const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
     const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
     const rowSpan = Math.ceil((item.querySelector('.content')
       .getBoundingClientRect().height + rowGap) / (rowHeight + rowGap));
-    (item as HTMLElement).style.gridRowEnd = "span " + rowSpan;
+
+    this.renderer.setStyle(item, 'grid-row-end', `span ${rowSpan}`);
   }
 
   showWelcome(data: { books: IBookItemModel[] | null; loading: boolean | null }): boolean {
