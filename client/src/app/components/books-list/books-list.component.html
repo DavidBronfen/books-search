@@ -16,25 +16,11 @@
   </div>
 
   <div class="grid" *ngIf="showResults(data)">
-    <div class="item" *ngFor="let book of data.books">
-      <div class="content">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>{{book.title}}</mat-card-title>
-            <mat-card-subtitle>{{book.subtitle}}</mat-card-subtitle>
-            <mat-card-subtitle>{{book.authors}}</mat-card-subtitle>
-          </mat-card-header>
-          <img
-            loadingCheck
-            mat-card-image
-            [src]="book.image ? book.image : placeholderImage"
-            alt="Photo of {{book.title}}">
-          <mat-card-content>
-            <p>{{book.description}}</p>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
+    <app-book-card
+      *ngFor="let book of data.books"
+      [book]="book"
+      (imageIsLoaded)="resizeAllGridItems()">
+    </app-book-card>
   </div>
 
 </ng-container>
