@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -21,33 +22,36 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { reducers } from './store/state.index';
 import { BooksEffect } from './store/books.effect';
+
 import { SearchComponent } from './components/search/search.component';
 import { BooksListComponent } from './components/books-list/books-list.component';
-import { MatCardModule } from '@angular/material/card';
+import { BookCardComponent } from './components/book-card/book-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
     BooksListComponent,
-    ImageDirective
+    ImageDirective,
+    BookCardComponent
   ],
-    imports: [
-        HttpClientModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        FlexLayoutModule,
-        MatInputModule,
-        StoreModule.forRoot(reducers),
-        EffectsModule.forRoot([BooksEffect]),
-        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-        FormsModule,
-        MatIconModule,
-        MatButtonModule,
-        ReactiveFormsModule,
-        MatCardModule
-    ],
+  imports: [
+    HttpClientModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    MatInputModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([BooksEffect]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    FormsModule,
+    MatIconModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatCardModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
