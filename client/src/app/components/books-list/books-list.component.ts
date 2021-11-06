@@ -1,18 +1,17 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  OnDestroy,
   OnInit,
   QueryList,
+  Renderer2,
   ViewChildren
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { forkJoin, Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { getBooksList, isLoadingBooks } from '../../store/books.reducer';
 import { IBookItemModel } from '../../models/books.model';
-import { ImageDirective } from '../../directives/image.directive';
+import { BookCardComponent } from '../book-card/book-card.component';
 
 @Component({
   selector: 'app-books-list',
@@ -23,56 +22,38 @@ import { ImageDirective } from '../../directives/image.directive';
     '(window:resize)': 'onResize()'
   }
 })
-export class BooksListComponent implements OnInit, OnDestroy, AfterViewInit {
+export class BooksListComponent implements OnInit {
+
+  @ViewChildren(BookCardComponent) bookCards: QueryList<BookCardComponent>;
+
   books$: Observable<IBookItemModel[]>;
   loading$: Observable<boolean>;
 
-  subscription: Subscription;
-  @ViewChildren(ImageDirective) images: QueryList<ImageDirective>;
-  placeholderImage = 'assets/no_image.jpg';
-
-  constructor(private store: Store) {
-  }
+  constructor(private store: Store, private renderer: Renderer2) {}
 
   ngOnInit(): void {
     this.books$ = this.store.select(getBooksList)
     this.loading$ = this.store.select(isLoadingBooks);
   }
 
+  onResize() {
+    this.resizeAllGridItems();
+  }
+
   resizeAllGridItems() {
-    const allItems = document.getElementsByClassName("item");
-    for (let x = 0; x < allItems.length; x++) {
-      this.resizeGridItem(allItems[x]);
-    }
+    // Do nothing when one of the cards is still loading an image.
+    if (this.bookCards.some(card => card.loadingImage)) return;
+    this.bookCards.map(card => this.resizeGridItem(card.elementRef.nativeElement))
   }
 
-  ngAfterViewInit(): void {
-    this.subscription = this.images.changes
-      .subscribe(() => {
-        forkJoin(this.images.map(imgDir => imgDir.loaded))
-          .subscribe(() => {
-            this.resizeAllGridItems();
-          });
-      });
-  }
-
-  resizeGridItem(item: Element) {
+  resizeGridItem(item: HTMLElement) {
     const grid = document.getElementsByClassName("grid")[0];
     const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
     const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
     const rowSpan = Math.ceil((item.querySelector('.content')
       .getBoundingClientRect().height + rowGap) / (rowHeight + rowGap));
-    (item as HTMLElement).style.gridRowEnd = "span " + rowSpan;
-  }
 
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
-
-  onResize() {
-    this.resizeAllGridItems();
+    this.renderer.setStyle(item, 'grid-row-end', `span ${rowSpan}`);
   }
 
   showWelcome(data: { books: IBookItemModel[] | null; loading: boolean | null }): boolean {

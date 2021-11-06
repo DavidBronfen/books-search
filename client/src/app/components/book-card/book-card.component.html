@@ -1,0 +1,24 @@
+<div class="content">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{book.title}}</mat-card-title>
+      <mat-card-subtitle>{{book.subtitle}}</mat-card-subtitle>
+      <mat-card-subtitle>Authors: {{book.authors}}</mat-card-subtitle>
+    </mat-card-header>
+    <img
+      loadingCheck
+      mat-card-image
+      (loaded)="imageLoaded()"
+      [src]="book.image ? book.image : placeholderImage"
+      [ngStyle]="{ visibility: loadingImage ? 'hidden' : '' }"
+      alt="Photo of {{book.title}}">
+    <img
+      *ngIf="loadingImage"
+      mat-card-image
+      src="assets/image-loader.gif"
+      alt="Image loader spinner">
+    <mat-card-content>
+      <p>{{book.description}}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
