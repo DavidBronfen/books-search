@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { SearchBooks } from '../../store/books.actions';
+
+import { SearchBooks } from '../../../feed/store/books.actions';
 
 @Component({
   selector: 'app-search',

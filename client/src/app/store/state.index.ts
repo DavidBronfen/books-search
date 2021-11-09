@@ -1,5 +1,5 @@
 import { ActionReducerMap } from '@ngrx/store';
-import * as fromBooks from './books.reducer';
+import * as fromBooks from '../feed/store/books.reducer';
 
 export interface IAppState {
   books: fromBooks.State;
