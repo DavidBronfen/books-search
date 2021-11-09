@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,6 +19,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ImageDirective } from './directives/image.directive';
 
 import { AppComponent } from './app.component';
+
+import { AppRoutingModule } from './app-routing.module';
 
 import { environment } from '../environments/environment';
 import { reducers } from './store/state.index';
@@ -36,6 +39,7 @@ import { BookCardComponent } from './components/book-card/book-card.component';
     BookCardComponent
   ],
   imports: [
+    AppRoutingModule,
     HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -48,7 +52,8 @@ import { BookCardComponent } from './components/book-card/book-card.component';
     MatIconModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatCardModule
+    MatCardModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
