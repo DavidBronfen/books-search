@@ -3,7 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ISearchResponseModel } from '../models/books.model';
-import { environment } from '../../environments/environment';
+
+import { environment } from '../../../environments/environment';
 
 
 @Injectable({
@@ -13,7 +14,6 @@ export class BooksService {
   serverURL
   constructor(private http: HttpClient) {
     this.serverURL = environment.serverUrl;
-
   }
 
   searchBooksAPI(term: string): Observable<ISearchResponseModel> {
