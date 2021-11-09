@@ -1,1 +1,20 @@
-<p>login works!</p>
+<app-animated-background></app-animated-background>
+
+<div class="welcome-wrapper">
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input
+      matInput
+      placeholder="Please insert your name"
+      [formControl]="name">
+    <mat-error *ngIf="name.hasError('required')">Name is required</mat-error>
+    <mat-error *ngIf="name.hasError('pattern')">This field accept latter's only</mat-error>
+  </mat-form-field>
+
+  <button
+    mat-flat-button
+    class="submit-button"
+    type="submit"
+    [disabled]="!name.valid"
+  >login</button>
+</div>

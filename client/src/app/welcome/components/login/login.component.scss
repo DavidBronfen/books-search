@@ -1,0 +1,43 @@
+@import "src/assets/styles/form.styles";
+@import "src/assets/styles/colors";
+
+:host {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+
+  .welcome-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 450px;
+    background: rgba(255, 255, 255, 0.70);
+    box-shadow: 0 0 20px #00000029;
+    border-radius: 20px;
+    padding: 55px 70px;
+    z-index: 1;
+
+    ::ng-deep .mat-form-field {
+      @extend %form-field;
+
+      // outline style
+      &.mat-form-field-appearance-outline { @extend %form-field-appearance-outline; }
+
+      // inner style
+      .mat-form-field-flex { @extend %mat-form-field-flex; }
+      &:last-of-type {
+        margin-top: 5px;
+      }
+    }
+
+    .submit-button {
+      @extend %submit-button;
+    }
+  }
+
+}
