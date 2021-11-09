@@ -1,0 +1,12 @@
+<ul class="shapes">
+  <li
+    *ngFor="let item of shapes"
+    [ngStyle]="{
+      'left': item.left,
+      'height': item.height,
+      'width': item.width,
+      'animation-duration': item.animationDuration,
+      'animation-delay': item.animationDelay
+    }"
+  ></li>
+</ul>
