@@ -40,6 +40,15 @@ const booksReducer = createReducer(
       isLoading: false,
       isError: true
     })
+  ),
+  on(
+    BooksActions.ClearSearch,
+    (): State => ({
+      term: null,
+      booksList: null,
+      isLoading: null,
+      isError: null
+    })
   )
 )
 
