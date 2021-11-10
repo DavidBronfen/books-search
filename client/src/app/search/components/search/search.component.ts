@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-import { SearchBooks } from '../../../feed/store/books.actions';
+import { ClearSearch, SearchBooks } from '../../../feed/store/books.actions';
+import { getName } from '../../../auth/store/auth.reducer';
 
 @Component({
   selector: 'app-search',
@@ -11,37 +14,30 @@ import { SearchBooks } from '../../../feed/store/books.actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnInit {
-  searchBooksForm: FormGroup;
+  searchControl: FormControl = new FormControl();
+  name$: Observable<string>;
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.searchBooksForm = new FormGroup({
-      searchTerm: new FormControl(null, [Validators.required])
-    });
-  }
 
-  get searchTerm(): AbstractControl {
-    return this.searchBooksForm.get('searchTerm') as AbstractControl;
-  }
+    this.name$ = this.store.select(getName);
 
-  hasError(controlName: string, errorName: string): boolean {
-    return this.searchBooksForm.controls[controlName].hasError(errorName);
+    this.searchControl.valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged()
+    ).subscribe((term: string) => term ?
+      this.store.dispatch(SearchBooks({ term })) :
+      this.store.dispatch(ClearSearch())
+    )
   }
 
   displayButton(): boolean {
-    return this.searchTerm.value
+    return this.searchControl.value
   }
 
   resetSearchTerm(): void {
-    this.searchTerm.reset();
-  }
-
-  searchBooks(): void {
-    this.store.dispatch(SearchBooks({ term: this.searchTerm.value }))
-  }
-
-  isDisabled(): boolean {
-    return !this.searchBooksForm.valid
+    this.searchControl.reset();
+    this.store.dispatch(ClearSearch());
   }
 }
