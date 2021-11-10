@@ -1,0 +1,118 @@
+@import "src/assets/styles/colors";
+
+
+%form-field {
+  width: 100%;
+  font: 400 16px/21px Roboto, sans-serif;
+
+  &.mat-form-field-invalid {
+    .mat-form-field-label {
+      color: $red;
+    }
+
+    .mat-form-field-flex {
+      .mat-input-element {
+        caret-color: $red;
+      }
+    }
+  }
+
+  .mat-error {
+    color: $red;
+    font: 400 12px/16px Roboto, sans-serif;
+
+    span{
+      font-weight: 500;
+    }
+  }
+}
+
+%form-field-appearance-outline {
+  // input outline color
+  .mat-form-field-outline {
+    transition: all .2s ease-in;
+  }
+
+  .mat-form-field-outline-thick {
+    .mat-form-field-outline-start,
+    .mat-form-field-outline-gap,
+    .mat-form-field-outline-end {
+      border-width: 1px;
+    }
+  }
+
+  &.mat-focused {
+    // input focused color
+    .mat-form-field-outline-thick,
+    .mat-form-field-outline,
+    .mat-form-field-label {
+      color: 	$dark-grey;
+    }
+  }
+
+  &:hover {
+    .mat-form-field-outline {
+      color: 	$dark-grey;
+    }
+  }
+
+  &.mat-form-field-invalid {
+    &.mat-form-field-invalid {
+      .mat-form-field-outline-thick,
+      .mat-form-field-outline,
+      .mat-form-field-label {
+        color: $red;
+      }
+    }
+  }
+}
+
+%mat-form-field-flex {
+  .mat-form-field-infix {
+    padding: .6em 0 .8em;
+
+    .mat-input-element {
+      caret-color: $dark-grey;
+    }
+
+    .mat-form-field-label-wrapper {
+      top: -1.3em;
+
+      .mat-form-field-label {
+        margin: 0;
+      }
+    }
+  }
+  .mat-form-field-suffix {
+    top: .3em;
+    .mat-icon-button {
+      .mat-icon {
+        color: $dark-grey;
+      }
+    }
+  }
+}
+
+%submit-button {
+  padding: 13px 70px;
+  margin-top: 25px;
+  border-radius: 25px;
+  color: $smoke-white;
+  background-color: $green;
+  font: 700 15px/19px 'Dosis', sans-serif;
+  transition: all .2s ease-in;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+
+  &:hover {
+    box-shadow: 0 0 20px 0 rgba(128, 189, 147, 0.8);
+  }
+
+  &:disabled {
+    color: $grey;
+    background-color: $olive-grey;
+    &:hover {
+      box-shadow: none;
+    }
+  }
+}
