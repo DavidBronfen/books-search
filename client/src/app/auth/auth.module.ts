@@ -7,7 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
-import { WelcomeRoutingModule } from './welcome-routing.module';
+import { AuthRoutingModule } from './auth-routing.module';
 
 import { LoginComponent } from './components/login/login.component';
 import { AnimatedBackgroundComponent } from './components/animated-background/animated-background.component';
@@ -23,7 +23,7 @@ import { AuthEffect } from './store/auth.effect';
   ],
   imports: [
     CommonModule,
-    WelcomeRoutingModule,
+    AuthRoutingModule,
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
@@ -31,4 +31,4 @@ import { AuthEffect } from './store/auth.effect';
     EffectsModule.forFeature([AuthEffect]),
   ]
 })
-export class WelcomeModule { }
+export class AuthModule { }

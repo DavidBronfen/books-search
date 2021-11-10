@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '',  redirectTo: 'welcome', pathMatch: 'full' },
-  { path: 'welcome', loadChildren: () => import('./welcome/welcome.module').then(module => module.WelcomeModule) },
+  { path: 'welcome', loadChildren: () => import('./auth/auth.module').then(module => module.AuthModule) },
   { path: 'feed', loadChildren: () => import('./feed/feed.module').then(module => module.FeedModule) }
 ]
 
