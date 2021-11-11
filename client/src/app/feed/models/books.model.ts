@@ -7,11 +7,13 @@ export interface ISearchResponseModel extends ISearchRequestModel {
 }
 
 export interface IBookItemModel {
+  id: string;
   title: string;
   subtitle: string;
   authors: string;
   description: string;
   image: string;
+  publishedDate: string;
   pageCount: number;
   rating: number
 }
