@@ -75,7 +75,10 @@ export class BooksListComponent implements OnInit {
   }
 
   getBooksInfo(book: IBookItemModel) {
-    console.log(book);
-    this.dialog.open(BookDetailsComponent);
+    this.dialog.open(BookDetailsComponent, {
+      panelClass: 'book-details',
+      disableClose: true,
+      data: book
+    });
   }
 }

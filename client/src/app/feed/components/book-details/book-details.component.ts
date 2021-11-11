@@ -1,4 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
+import { IBookItemModel } from '../../models/books.model';
 
 @Component({
   selector: 'app-book-details',
@@ -6,11 +9,18 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./book-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookDetailsComponent implements OnInit {
+export class BookDetailsComponent {
 
-  constructor() { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public book: IBookItemModel,
+    public dialogRef: MatDialogRef<BookDetailsComponent>,
+  ) { }
 
-  ngOnInit(): void {
+  closeDialog() {
+    this.dialogRef.close();
   }
 
+  addToWishList() {
+    console.log(this.book.id);
+  }
 }

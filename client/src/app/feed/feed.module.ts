@@ -7,6 +7,8 @@ import { StoreModule } from '@ngrx/store';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { FeedRoutingModule } from './feed-routing.module';
 import { SearchModule } from '../search/search.module';
@@ -20,7 +22,6 @@ import { BookDetailsComponent } from './components/book-details/book-details.com
 
 import { BooksEffect } from './store/books.effect';
 import { reducer } from './store/books.reducer';
-
 
 @NgModule({
   declarations: [
@@ -37,8 +38,10 @@ import { reducer } from './store/books.reducer';
     MatButtonModule,
     MatDialogModule,
     StoreModule.forFeature('books', reducer),
-    EffectsModule.forFeature([ BooksEffect ]),
+    EffectsModule.forFeature([BooksEffect]),
     SearchModule,
+    MatIconModule,
+    MatTooltipModule,
   ],
 })
 export class FeedModule { }
