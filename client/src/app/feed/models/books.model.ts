@@ -12,6 +12,8 @@ export interface IBookItemModel {
   authors: string;
   description: string;
   image: string;
+  pageCount: number;
+  rating: number
 }
 
 export interface IBooksModel extends ISearchResponseModel {
