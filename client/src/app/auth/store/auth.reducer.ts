@@ -4,7 +4,7 @@ import * as AuthActions from './auth.actions';
 export type State = { name: string; }
 
 export const initialState: Readonly<State> = {
-  name: null
+  name: 'David'
 }
 
 const authReducer = createReducer(
