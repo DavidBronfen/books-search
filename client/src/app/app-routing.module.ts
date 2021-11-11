@@ -9,6 +9,11 @@ const routes: Routes = [
     path: 'feed',
     loadChildren: () => import('./feed/feed.module').then(module => module.FeedModule),
     canActivate: [ UserAccessGuard ]
+  },
+  {
+    path: 'wishlist',
+    loadChildren: () => import('./wishlist/wishlist.module').then(module => module.WishlistModule),
+    canActivate: [ UserAccessGuard ]
   }
 ]
 
