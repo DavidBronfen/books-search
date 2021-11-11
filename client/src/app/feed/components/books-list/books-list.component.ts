@@ -12,6 +12,8 @@ import { Observable } from 'rxjs';
 import { getBooksList, isLoadingBooks } from '../../store/books.reducer';
 import { IBookItemModel } from '../../models/books.model';
 import { BookCardComponent } from '../book-card/book-card.component';
+import { MatDialog } from '@angular/material/dialog';
+import { BookDetailsComponent } from '../book-details/book-details.component';
 
 @Component({
   selector: 'app-books-list',
@@ -29,7 +31,11 @@ export class BooksListComponent implements OnInit {
   books$: Observable<IBookItemModel[]>;
   loading$: Observable<boolean>;
 
-  constructor(private store: Store, private renderer: Renderer2) {}
+  constructor(
+    private store: Store,
+    private renderer: Renderer2,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.books$ = this.store.select(getBooksList)
@@ -66,5 +72,13 @@ export class BooksListComponent implements OnInit {
 
   showResults(data: { books: IBookItemModel[] | null; loading: boolean | null }) {
     return data.books && data.books.length && !data.loading;
+  }
+
+  getBooksInfo(book: IBookItemModel) {
+    this.dialog.open(BookDetailsComponent, {
+      panelClass: 'book-details',
+      disableClose: true,
+      data: book
+    });
   }
 }

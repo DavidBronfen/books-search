@@ -1,0 +1,13 @@
+@import "src/assets/styles/colors";
+
+:host {
+  ::ng-deep {
+    .mat-card {
+      cursor: pointer;
+      transition: background-color .2s linear;
+      &:hover {
+        background-color: lighten($green, 20%);
+      }
+    }
+  }
+}

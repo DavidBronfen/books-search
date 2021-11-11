@@ -1,0 +1,24 @@
+<mat-icon
+  class="close"
+  (click)="closeDialog()">close</mat-icon>
+
+  <h1 *ngIf="book.title">{{book.title}}</h1>
+  <h3 *ngIf="book.subtitle">{{book.subtitle}}</h3>
+
+<div class="extra-details">
+  <p *ngIf="book.authors">
+    <span>Authors: </span>
+    {{book.authors}}
+  </p>
+  <p *ngIf="book.publishedDate">Published on: {{book.publishedDate}}</p>
+  <p *ngIf="book.rating">Rating: {{book.rating}}</p>
+  <p *ngIf="book.pageCount">Pages: {{book.pageCount}}</p>
+
+  <button
+    mat-mini-fab
+    matTooltip="Add to wish list"
+    (click)="addToWishList()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<p>{{book.description}}</p>

@@ -1,0 +1,105 @@
+@import "src/assets/styles/colors";
+
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+  max-width: 960px;
+  max-height: 65vh;
+
+  .close {
+    top: -24px;
+    right: -24px;
+    position: absolute;
+    cursor: pointer;
+    color: $olive-grey;
+  }
+
+  h1, h3 { margin: 0; }
+
+  h1 { color: $green; }
+
+  h3 {
+    color: $olive-grey;
+    margin-top: 8px;
+  }
+
+  .extra-details {
+    display: flex;
+    align-items: center;
+    color: $olive-grey;
+    margin-top: 16px;
+    padding: 8px 0;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+
+    p {
+      text-indent: 0;
+      font-size: .8rem;
+      padding-left: 16px;
+      padding-right: 16px;
+      border-left: 1px solid;
+      display: inline-block;
+
+      span {
+        font-weight: 500;
+      }
+
+      &:first-child {
+        padding-left: 8px;
+        border-left: none;
+      }
+
+      &:last-child {
+        padding-right: 8px;
+      }
+    }
+
+    ::ng-deep .mat-mini-fab {
+      background: $green;
+      width: 32px;
+      height: 32px;
+      margin-left: auto;
+
+      .mat-button-wrapper {
+        padding: 0;
+        display: flex;
+        justify-content: center;
+
+        .mat-icon { color: $smoke-white; }
+      }
+    }
+
+  }
+
+  p {
+    color: #3b3a36;
+    font-size: 18px;
+    line-height: 1.5;
+    overflow-y: auto;
+    padding-right: 16px;
+
+    &::-webkit-scrollbar-track {
+      background-color: $stone-white;
+    }
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $green;
+      border-radius: 20px;
+      border: 3px solid $green;
+    }
+  }
+
+}
+
+::ng-deep .book-details {
+  .mat-dialog-container {
+    background: $smoke-white;
+    padding: 32px;
+  }
+}

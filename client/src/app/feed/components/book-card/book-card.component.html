@@ -18,7 +18,7 @@
       src="assets/image-loader.gif"
       alt="Image loader spinner">
     <mat-card-content>
-      <p>{{book.description}}</p>
+      <p>{{book.description | slice:0:200}}...</p>
     </mat-card-content>
   </mat-card>
 </div>
