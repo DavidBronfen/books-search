@@ -19,6 +19,7 @@
     <app-book-card
       *ngFor="let book of data.books"
       [book]="book"
+      (click)="getBooksInfo(book)"
       (imageIsLoaded)="resizeAllGridItems()">
     </app-book-card>
   </div>
