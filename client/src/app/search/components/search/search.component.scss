@@ -5,16 +5,20 @@
   display: flex;
   margin: 50px auto 0;
   flex-direction: column;
+  align-items: center;
 
   h1 {
     color: $dark-blue;
-    margin: 0 0 20px;
+    margin: 0;
     text-align: center;
+  }
+
+  .mat-flat-button {
+    margin-bottom: 20px;
   }
 
   .mat-form-field {
     width: 85%;
-    margin: 0 auto;
 
     .mat-form-field-infix {
       padding: .5em 0 1.3em 1.5em;
