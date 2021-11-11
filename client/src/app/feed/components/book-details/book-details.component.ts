@@ -1,10 +1,12 @@
-import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { IBookItemModel } from '../../models/books.model';
 import { Store } from '@ngrx/store';
 import { IWishListBookItemModel } from '../../../wishlist/models/wishlist.model';
-import { AddToWishlist } from '../../../wishlist/store/wishlist.actions';
+import { AddToWishlist, RemoveFromWishlist } from '../../../wishlist/store/wishlist.actions';
+import { Observable } from 'rxjs';
+import { isItemInWishlist } from '../../../wishlist/store/wishlist.reducer';
 
 @Component({
   selector: 'app-book-details',
@@ -12,13 +14,18 @@ import { AddToWishlist } from '../../../wishlist/store/wishlist.actions';
   styleUrls: ['./book-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookDetailsComponent {
+export class BookDetailsComponent implements OnInit {
+  isItemInWishlist$: Observable<boolean>
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public book: IBookItemModel,
     public dialogRef: MatDialogRef<BookDetailsComponent>,
     private store: Store
   ) { }
+
+  ngOnInit(): void {
+    this.isItemInWishlist$ = this.store.select(isItemInWishlist(this.book.id));
+  }
 
   closeDialog() {
     this.dialogRef.close();
@@ -32,6 +39,12 @@ export class BookDetailsComponent {
     }
 
     this.store.dispatch(AddToWishlist(bookToWishList));
+    this.closeDialog();
+  }
+
+
+  removeToWishList() {
+    this.store.dispatch(RemoveFromWishlist({id: this.book.id}));
     this.closeDialog();
   }
 }
