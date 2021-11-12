@@ -1,4 +1,6 @@
 @import "src/assets/styles/colors";
+@import "src/assets/styles/title.styles";
+@import "src/assets/styles/buttons.style";
 
 :host ::ng-deep {
   width: 50%;
@@ -8,13 +10,14 @@
   align-items: center;
 
   h1 {
-    color: $dark-blue;
-    margin: 0;
-    text-align: center;
+    @extend %title;
+    width: 75%;
+    margin-bottom: 16px;
   }
 
   .mat-flat-button {
-    margin-bottom: 20px;
+    @extend %animated-button;
+    margin-bottom: 16px;
   }
 
   .mat-form-field {
@@ -23,11 +26,17 @@
     .mat-form-field-infix {
       padding: .5em 0 1.3em 1.5em;
 
+      .mat-input-element {
+        caret-color: $dark-blue;
+        color: $dark-blue;
+      }
+
       .mat-form-field-label-wrapper {
         left: 1.5em;
 
         .mat-form-field-label {
           top: 1.35em;
+          color: $dark-blue;
         }
       }
     }

@@ -1,0 +1,25 @@
+@import "colors";
+
+%title {
+  font-size: 30px;
+  font-weight: 300;
+  margin: 0 auto;
+  color: $green;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  width: 60%;
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+  grid-template-rows: 27px 0;
+  grid-gap: 20px;
+  align-items: center;
+
+  &:after,
+  &:before {
+    content: " ";
+    display: block;
+    border-bottom: 1px solid $olive-grey;
+    border-top: 1px solid $olive-grey;
+    height: 5px;
+  }
+}

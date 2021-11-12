@@ -1,5 +1,8 @@
 <h1>Hello {{name$ | async}}</h1>
-<a mat-flat-button [routerLink]="['/wishlist']">check your wishlist</a>
+<a
+  *ngIf="isWishListExists$ | async"
+  mat-flat-button
+  [routerLink]="['/wishlist']">my wishlist</a>
 
 <mat-form-field floatLabel="never">
   <mat-label>Search for books</mat-label>

@@ -34,4 +34,15 @@ const wishListState = createFeatureSelector<State>('wishlist');
 export const isItemInWishlist = (itemID: string) =>
   createSelector(
   wishListState,
-  (state: IWishListModel) => state.myList.some(item => item.id === itemID));
+  (state: IWishListModel) => state.myList.some(item => item.id === itemID)
+);
+
+export const isWishlistExists = createSelector(
+    wishListState,
+    (state: IWishListModel) => !!state.myList.length
+);
+
+export const getWishlist = createSelector(
+  wishListState,
+  (state: IWishListModel) => state.myList
+)
