@@ -1,0 +1,56 @@
+@import "src/assets/styles/colors";
+@import "src/assets/styles/title.styles";
+
+:host {
+  display: block;
+  padding: 24px;
+  width: 80vw;
+  max-width: 960px;
+  margin: 0 auto;
+
+  h1 { @extend %title }
+
+  .wishlist-item {
+    display: flex;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    margin-bottom: 24px;
+    padding: 0 16px;
+
+    img {
+      clip-path: circle();
+      width: 60px;
+    }
+
+    p { margin: 0 16px; }
+
+    ::ng-deep .mat-mini-fab {
+      background: $red;
+      width: 32px;
+      height: 32px;
+      margin-left: auto;
+      box-shadow: none;
+
+      .mat-button-wrapper {
+        padding: 0;
+        display: flex;
+        justify-content: center;
+
+        .mat-icon {
+          color: $smoke-white;
+        }
+      }
+    }
+
+    h1 {
+      margin: 0;
+      color: $green;
+      font-size: 24px;
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
+

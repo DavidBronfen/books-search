@@ -10,15 +10,33 @@
     <span>Authors: </span>
     {{book.authors}}
   </p>
-  <p *ngIf="book.publishedDate">Published on: {{book.publishedDate}}</p>
-  <p *ngIf="book.rating">Rating: {{book.rating}}</p>
-  <p *ngIf="book.pageCount">Pages: {{book.pageCount}}</p>
+  <p *ngIf="book.publishedDate">
+    <span>Published on: </span>
+    {{book.publishedDate}}
+  </p>
+  <p *ngIf="book.rating">
+    <span>Rating: </span>
+    {{book.rating}}
+  </p>
+  <p *ngIf="book.pageCount">
+    <span>Pages: </span>
+    {{book.pageCount}}
+  </p>
 
   <button
+    *ngIf="!(isItemInWishlist$ | async)"
     mat-mini-fab
     matTooltip="Add to wish list"
     (click)="addToWishList()">
     <mat-icon>add</mat-icon>
+  </button>
+  <button
+    *ngIf="isItemInWishlist$ | async"
+    mat-mini-fab
+    matTooltip="Remove from wish list"
+    class="remove"
+    (click)="removeToWishList()">
+    <mat-icon>remove</mat-icon>
   </button>
 </div>
 <p>{{book.description}}</p>

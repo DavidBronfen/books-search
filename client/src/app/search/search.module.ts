@@ -10,18 +10,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { FlexModule } from '@angular/flex-layout';
 
 import { SearchComponent } from './components/search/search.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [ SearchComponent ],
   exports: [ SearchComponent ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatInputModule,
-    MatButtonModule,
-    FlexModule,
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatIconModule,
+        MatInputModule,
+        MatButtonModule,
+        FlexModule,
+        RouterModule,
+    ]
 })
 export class SearchModule { }

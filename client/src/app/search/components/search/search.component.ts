@@ -6,6 +6,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { ClearSearch, SearchBooks } from '../../../feed/store/books.actions';
 import { getName } from '../../../auth/store/auth.reducer';
+import { isWishlistExists } from '../../../wishlist/store/wishlist.reducer';
 
 @Component({
   selector: 'app-search',
@@ -16,12 +17,14 @@ import { getName } from '../../../auth/store/auth.reducer';
 export class SearchComponent implements OnInit {
   searchControl: FormControl = new FormControl();
   name$: Observable<string>;
+  isWishListExists$: Observable<boolean>;
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
 
     this.name$ = this.store.select(getName);
+    this.isWishListExists$ = this.store.select(isWishlistExists);
 
     this.searchControl.valueChanges.pipe(
       debounceTime(500),
