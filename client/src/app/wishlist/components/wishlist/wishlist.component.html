@@ -1,1 +1,20 @@
-<p>wishlist works!</p>
+<h1>{{name$ | async}}s wishlist</h1>
+
+<ng-container *ngIf="wishlist$ | async as wishlist">
+  <div
+    class="wishlist-item"
+    *ngFor="let item of wishlist">
+    <img
+      [src]="item.image ? item.image : placeholderImage"
+      alt="Photo of {{item.title}}">
+
+    <p>{{item.title}}</p>
+    <button
+      mat-mini-fab
+      matTooltip="Remove item"
+      class="remove"
+      (click)="removeToWishList(item.id)">
+      <mat-icon>remove</mat-icon>
+    </button>
+  </div>
+</ng-container>
