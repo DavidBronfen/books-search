@@ -9,6 +9,7 @@
   <input
     matInput
     placeholder="Search for books"
+    (keyup.enter)="searchBooks($event.target.value)"
     [formControl]="searchControl">
 
   <button

@@ -30,9 +30,13 @@ export class SearchComponent implements OnInit {
       debounceTime(500),
       distinctUntilChanged()
     ).subscribe((term: string) => term ?
-      this.store.dispatch(SearchBooks({ term })) :
+      this.searchBooks(term) :
       this.store.dispatch(ClearSearch())
     )
+  }
+
+  searchBooks(term: string): void {
+    this.store.dispatch(SearchBooks({ term }));
   }
 
   displayButton(): boolean {
