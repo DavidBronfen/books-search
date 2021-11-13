@@ -1,3 +1,8 @@
+<a
+  mat-flat-button
+  [routerLink]="['/feed']">
+  <mat-icon>arrow_back</mat-icon>
+  FEED</a>
 <h1>{{name$ | async}}s wishlist</h1>
 
 <ng-container *ngIf="wishlist$ | async as wishlist">
