@@ -24,7 +24,7 @@
   </p>
 
   <button
-    *ngIf="!(isItemInWishlist$ | async)"
+    *ngIf="(isItemInWishlist$ | async) === false"
     mat-mini-fab
     matTooltip="Add to wish list"
     (click)="addToWishList()">

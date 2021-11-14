@@ -16,7 +16,7 @@ const BOOK: IBookItemModel = {
   rating: 5,
   authors: 'authors',
   description: 'description'
-}
+};
 
 describe('Book card', () => {
 
@@ -53,6 +53,6 @@ describe('Book card', () => {
 
   it(`should have title 'book title'`, () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('mat-card-title').textContent).toContain(BOOK.title)
+    expect(compiled.querySelector('mat-card-title').textContent).toContain(BOOK.title);
   });
 });

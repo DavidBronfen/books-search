@@ -7,11 +7,11 @@ import * as fromWishlist from '../wishlist/store/wishlist.reducer';
 export interface IAppState {
   books: fromBooks.State;
   auth: fromAuth.State;
-  wishlist: fromWishlist.State
+  wishlist: fromWishlist.State;
 }
 
 export const reducers: ActionReducerMap<IAppState> = {
   books: fromBooks.reducer,
   auth: fromAuth.reducer,
   wishlist: fromWishlist.reducer
-}
+};

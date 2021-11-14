@@ -26,6 +26,6 @@ export class BooksEffect {
           catchError((error: Error) => of(BooksActions.SearchBooksFailed({ error })))
         )
       )
-    )
-  })
+    );
+  });
 }

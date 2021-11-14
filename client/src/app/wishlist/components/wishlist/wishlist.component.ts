@@ -15,7 +15,7 @@ import { getName } from '../../../auth/store/auth.reducer';
 })
 export class WishlistComponent implements OnInit {
   placeholderImage = 'assets/no_image.jpg';
-  wishlist$: Observable<IWishListBookItemModel[]>
+  wishlist$: Observable<IWishListBookItemModel[]>;
   name$: Observable<string>;
 
   constructor(private store: Store) { }
@@ -25,7 +25,7 @@ export class WishlistComponent implements OnInit {
     this.name$ = this.store.select(getName);
   }
 
-  removeToWishList(id: string) {
+  removeToWishList(id: string): void {
     this.store.dispatch(RemoveFromWishlist({id}));
   }
 }

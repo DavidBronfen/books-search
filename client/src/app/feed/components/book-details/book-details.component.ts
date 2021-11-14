@@ -15,7 +15,7 @@ import { isItemInWishlist } from '../../../wishlist/store/wishlist.reducer';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookDetailsComponent implements OnInit {
-  isItemInWishlist$: Observable<boolean>
+  isItemInWishlist$: Observable<boolean>;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public book: IBookItemModel,
@@ -27,23 +27,23 @@ export class BookDetailsComponent implements OnInit {
     this.isItemInWishlist$ = this.store.select(isItemInWishlist(this.book.id));
   }
 
-  closeDialog() {
+  closeDialog(): void {
     this.dialogRef.close();
   }
 
-  addToWishList() {
+  addToWishList(): void {
     const bookToWishList: IWishListBookItemModel = {
       id: this.book.id,
       title: this.book.title,
       image: this.book.image
-    }
+    };
 
     this.store.dispatch(AddToWishlist(bookToWishList));
     this.closeDialog();
   }
 
 
-  removeToWishList() {
+  removeToWishList(): void {
     this.store.dispatch(RemoveFromWishlist({id: this.book.id}));
     this.closeDialog();
   }

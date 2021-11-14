@@ -25,7 +25,7 @@ export class UserAccessGuard implements CanActivate {
         }
         return true;
       })
-    )
+    );
   }
 
 }

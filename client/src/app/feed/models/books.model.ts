@@ -15,10 +15,10 @@ export interface IBookItemModel {
   image: string;
   publishedDate: string;
   pageCount: number;
-  rating: number
+  rating: number;
 }
 
 export interface IBooksModel extends ISearchResponseModel {
-  isLoading: boolean,
-  isError: boolean
+  isLoading: boolean;
+  isError: boolean;
 }

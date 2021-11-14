@@ -6,16 +6,16 @@ import {
 } from '@angular/core';
 
 @Directive({
-  selector: 'img[loadingCheck]'
+  selector: 'img[appLoadingCheck]'
 })
 export class ImageDirective {
   @Output() loaded = new EventEmitter();
 
   constructor() {}
 
-  @HostListener("load")
-  @HostListener("error")
-  imageLoaded() {
+  @HostListener('load')
+  @HostListener('error')
+  imageLoaded(): void {
     this.loaded.emit();
     this.loaded.complete();
   }

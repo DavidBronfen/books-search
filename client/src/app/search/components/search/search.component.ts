@@ -32,7 +32,7 @@ export class SearchComponent implements OnInit {
     ).subscribe((term: string) => term ?
       this.searchBooks(term) :
       this.store.dispatch(ClearSearch())
-    )
+    );
   }
 
   searchBooks(term: string): void {
@@ -40,7 +40,7 @@ export class SearchComponent implements OnInit {
   }
 
   displayButton(): boolean {
-    return this.searchControl.value
+    return this.searchControl.value;
   }
 
   resetSearchTerm(): void {

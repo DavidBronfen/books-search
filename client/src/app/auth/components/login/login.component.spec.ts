@@ -25,12 +25,12 @@ describe('Login component', () => {
         ReactiveFormsModule
       ],
       providers: [ provideMockStore({}) ],
-    }).compileComponents()
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     nameControl = fixture.componentInstance.name;
-  })
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -47,7 +47,7 @@ describe('Login component', () => {
     beforeEach(() => {
       nameControl.markAllAsTouched();
       fixture.detectChanges();
-    })
+    });
 
     it('should has required validator', () => {
       expect(nameControl.hasError('required')).toBeTruthy();
@@ -59,7 +59,7 @@ describe('Login component', () => {
 
     it('should check button is disabled', (() => {
       const button = fixture.debugElement.query(By.css('.submit-button'));
-      expect(button.nativeElement.disabled).toBe(true)
+      expect(button.nativeElement.disabled).toBe(true);
     }));
-  })
-})
+  });
+});

@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submitUSer() {
+  submitUSer(): void {
     if (this.name.valid) {
       this.store.dispatch(LoginUser({ name: this.name.value }));
     }

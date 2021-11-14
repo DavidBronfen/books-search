@@ -13,11 +13,11 @@ export class BookCardComponent {
   @Output() imageIsLoaded: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   placeholderImage = 'assets/no_image.jpg';
-  loadingImage: boolean = true;
+  loadingImage = true;
 
   constructor(public elementRef: ElementRef) {}
 
-  imageLoaded() {
+  imageLoaded(): void {
     this.loadingImage = false;
     this.imageIsLoaded.emit();
   }

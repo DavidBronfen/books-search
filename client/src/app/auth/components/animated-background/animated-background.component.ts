@@ -20,7 +20,7 @@ export class AnimatedBackgroundComponent implements OnInit {
   // Create 15 shapes with random style parameters.
   createShapes(): void {
     for (let i = 0; i < 8; i++) {
-      const shapeDimension: string = `${this.randomNumber(i * 10, 150)}px`;
+      const shapeDimension = `${this.randomNumber(i * 10, 150)}px`;
       const shapeObj: ShapesModel = {
         left: `${this.randomNumber(i, 85)}%`,
         width: shapeDimension,

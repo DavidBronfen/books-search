@@ -20,11 +20,13 @@ export class AuthEffect {
     return this.actions$.pipe(
       ofType(AuthActions.LoginUser),
       concatLatestFrom(() => this.store.select(getName)),
-      tap(([_action, name]) => {
-        if (name) this.router.navigateByUrl('feed')
+      tap(([_, name]) => {
+        if (name) {
+          this.router.navigateByUrl('feed');
+        }
       }),
       catchError((err) => of(err))
-    )
-  }, { dispatch: false })
+    );
+  }, { dispatch: false });
 }
 

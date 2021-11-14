@@ -6,7 +6,7 @@
       <mat-card-subtitle>Authors: {{book.authors}}</mat-card-subtitle>
     </mat-card-header>
     <img
-      loadingCheck
+      appLoadingCheck
       mat-card-image
       (loaded)="imageLoaded()"
       [src]="book.image ? book.image : placeholderImage"

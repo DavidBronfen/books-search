@@ -10,7 +10,7 @@ export const initialState: Readonly<State> = {
   booksList: null,
   isLoading: null,
   isError: null
-}
+};
 
 const booksReducer = createReducer(
   initialState,
@@ -50,7 +50,7 @@ const booksReducer = createReducer(
       isError: null
     })
   )
-)
+);
 
 export const reducer = (state: State, action: Action): State => booksReducer(state, action);
 const booksState = createFeatureSelector<State>('books');

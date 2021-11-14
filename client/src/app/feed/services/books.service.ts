@@ -11,7 +11,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class BooksService {
-  serverURL
+  serverURL;
   constructor(private http: HttpClient) {
     this.serverURL = environment.serverUrl;
   }

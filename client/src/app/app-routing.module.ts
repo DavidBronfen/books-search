@@ -15,7 +15,7 @@ const routes: Routes = [
     loadChildren: () => import('./wishlist/wishlist.module').then(module => module.WishlistModule),
     canActivate: [ UserAccessGuard ]
   }
-]
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],

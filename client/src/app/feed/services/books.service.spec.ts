@@ -42,7 +42,7 @@ describe('Books service', () => {
       expect(items.booksList[0].title).toBe(RESPONSE.booksList[0].title);
     });
 
-    const expectedUrl = `${serverURL}/search-books?term=${encodeURIComponent(TERM)}`
+    const expectedUrl = `${serverURL}/search-books?term=${encodeURIComponent(TERM)}`;
     const req = httpTestingController.expectOne(expectedUrl);
     expect(req.request.method).toBe('GET');
     req.flush(RESPONSE);

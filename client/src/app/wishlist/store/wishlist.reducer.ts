@@ -7,7 +7,7 @@ export type State = IWishListModel;
 
 export const initialState: Readonly<State> = {
   myList: []
-}
+};
 
 const wishListReducer = createReducer(
   initialState,
@@ -26,7 +26,7 @@ const wishListReducer = createReducer(
       myList: state.myList.filter(item => item.id !== payload.id)
     })
   )
-)
+);
 
 export const reducer = (state: State, action: Action): State => wishListReducer(state, action);
 const wishListState = createFeatureSelector<State>('wishlist');
@@ -45,4 +45,4 @@ export const isWishlistExists = createSelector(
 export const getWishlist = createSelector(
   wishListState,
   (state: IWishListModel) => state.myList
-)
+);
