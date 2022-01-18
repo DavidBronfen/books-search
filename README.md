@@ -1,4 +1,4 @@
-# Esquare Books Search
+# Books Search
 
 ## Instruction:
 In order to run the application locally follow the next steps:
