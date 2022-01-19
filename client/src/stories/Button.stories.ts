@@ -9,6 +9,7 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/angular/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' },
+    color: { control: 'color' },
   },
 } as Meta;
 
@@ -21,22 +22,22 @@ export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/angular/writing-stories/args
 Primary.args = {
   primary: true,
-  label: 'Button',
+  label: 'Button Primary',
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  label: 'Button',
+  label: 'Button secondary',
 };
 
 export const Large = Template.bind({});
 Large.args = {
   size: 'large',
-  label: 'Button',
+  label: 'Button large',
 };
 
 export const Small = Template.bind({});
 Small.args = {
   size: 'small',
-  label: 'Button',
+  label: 'Button small',
 };

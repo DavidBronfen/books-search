@@ -6,7 +6,10 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     type="button"
     (click)="onClick.emit($event)"
     [ngClass]="classes"
-    [ngStyle]="{ 'background-color': backgroundColor }"
+    [ngStyle]=" {
+    'background-color': backgroundColor,
+    color: color
+   }"
   >
     {{ label }}
   </button>`,
@@ -24,6 +27,12 @@ export default class ButtonComponent {
    */
   @Input()
   backgroundColor?: string;
+
+  /**
+   * What is the text color
+   */
+  @Input()
+  color = '#333';
 
   /**
    * How large should the button be?
